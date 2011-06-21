@@ -1,0 +1,12 @@
+environment: development
+chdir: /projects/sinatra_template_app
+address: 127.0.0.1
+port: 5000
+pid: /projects/sinatra_template_app/tmp/thin.pid
+rackup: /projects/sinatra_template_app/config.ru
+log: /projects/sinatra_template_app/log/thin.log
+max_conns: 1024
+timeout: 30
+max_persistent_conns: 128
+daemonize: true
+
