@@ -7,4 +7,6 @@ disable :run, :reload
 
 require './the_app.rb'
 
+DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/the_app.db")
+
 run TheApp.new
