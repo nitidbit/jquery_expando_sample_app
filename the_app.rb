@@ -1,5 +1,4 @@
 require 'sinatra'
-require 'datamapper'
 
 class TheApp < Sinatra::Base
   set :environment, :production
@@ -7,8 +6,6 @@ class TheApp < Sinatra::Base
   set :root, Dir.pwd
   set :port, 5678
   APP_ROOT = root
-
-  DataMapper::setup(:default, "sqlite3://#{root}/the_app.db")
 
   get '/' do
     'yo'

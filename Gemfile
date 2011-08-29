@@ -1,12 +1,11 @@
-source 'http://rubygems.org'
+source :gemcutter
 gem 'sinatra'
-gem 'capistrano'
-gem 'thin'
-
-gem "dm-sqlite-adapter"
-gem "datamapper"
 
 group :test do
-  gem "rspec"
-  gem "rack-test"
+  # js testing
+  gem 'jasmine'
+  gem 'jasmine-headless-webkit'
+  gem 'rspec'
+  gem 'rack-test'
+	
 end
