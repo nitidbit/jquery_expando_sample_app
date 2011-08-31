@@ -1,6 +1,6 @@
 source :gemcutter
 gem 'sinatra'
-
+gem 'haml'
 group :test do
   # js testing
   gem 'jasmine'

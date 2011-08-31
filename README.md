@@ -4,6 +4,14 @@ This app is a simple starting point for a Sinatra app which uses Capistrano to d
 
 You'll need to modify the thin/*.yml config files and the app main file and name along with config.ru (which starts the app by class name).
 
+Once you've got the source code, 
+
+    % bundle install
+    % rake run
+
+That should get you on your way.  You'll be able to see the jquery plugin on the front page (localhost:5678).
+
+
 ##Notes:
 
 I went through the process of cloning this and starting up a new app from this template.  There were a few extra steps i had to do to make things really roll...
