@@ -23,15 +23,16 @@
       #accordion_me .accordion_viewport { overflow:hidden;  height: <closed desired height>; position:relative; }
       #accordion_me .accordion_contents { position: absolute; top: 0; left: 0; }
 
-    possible settings are
-      viewportClass: 'accordion_viewport',
-      contentsClass: 'accordion_contents',
-      toggleButtonClass: 'accordion_toggle',
-      openButtonClass: 'accordion_open_btn',
-      closeButtonClass: 'accordion_close_btn',
-      openClass: 'open',
-      closeClass: 'closed',
-      duration: 1000
+    possible settings are (with their defaults)
+      viewportClass: 'accordion_viewport'
+      contentsClass: 'accordion_contents'
+      toggleButtonClass: 'accordion_toggle'
+      openButtonClass: 'accordion_open_btn'
+      closeButtonClass: 'accordion_close_btn'
+      openClass: 'open'
+      closeClass: 'closed'
+      duration: 1000,
+      easing: 'easeOutQuad'
       afterAnimateCallback: function() {}
     
     Because this is built to either have a toggle button which opens and closes the view, 
@@ -67,8 +68,9 @@ $.accordionDefaults = {
   contentsClass: 'accordion_contents',
   openClass: 'open',
   closeClass: 'closed',
+  duration: 1000,
+  easing: 'easeOutQuad',
   afterAnimateCallback: function() {},
-  duration: 1000
 };
 
 
@@ -83,20 +85,21 @@ $.fn.accordion = function( method ) {
         throw "Unable to initialize accordion plugin.  You must specify either toggleButtonClass or both openButtonClass and closeButtonClass in your initialization";
       }
 
-      var localSettings = $.extend({},$.accordionDefaults, options);
+      var opts = $.extend({},$.accordionDefaults, options);
       var $this = $(this);
-      localSettings.currentState = localSettings.closeClass;
-      $this.data(localSettings);
-      var $viewport = $('.' + localSettings.viewportClass, this);
-      var $contents = $('.' + localSettings.contentsClass, this);
+      opts.currentState = opts.closeClass;
+      $this.data(opts);
+      var $viewport = $('.' + opts.viewportClass, this);
+      var $contents = $('.' + opts.contentsClass, this);
       var _that = this;
       
       var open_height = $contents.height();
       var closed_height = $viewport.height();
       var $container = $(this);
 
+      var easing = (jQuery.easing[opts.easing] ? opts.easing : 'linear');
       /* toggle button bind */
-      $('.' + localSettings.toggleButtonClass, this).bind('click', function() {
+      $('.' + opts.toggleButtonClass, this).bind('click', function() {
         var after_state = $container.data('openClass');
         var before_state = $container.data('closeClass');
         var new_height = open_height;
@@ -108,35 +111,35 @@ $.fn.accordion = function( method ) {
         $('.' + $container.data('toggleButtonClass'), _that).removeClass(before_state).addClass(after_state);
         $viewport.stop().animate({
           height: new_height
-        }, $container.data('duration'), 'easeOutQuad', function() {
+        }, $container.data('duration'), easing, function() {
           // set the current state and call the callback
           $container.data('currentState',after_state);
           $container.data('afterAnimateCallback').call($container[0]);
         });
       });
       /* open button bind */
-      $('.' + localSettings.openButtonClass, this).bind('click', function() {
+      $('.' + opts.openButtonClass, this).bind('click', function() {
         var after_state = $container.data('openClass');
         var before_state = $container.data('closeClass');
         $('.' + $container.data('openButtonClass'), _that).removeClass(before_state).addClass(after_state);
         $('.' + $container.data('closeButtonClass'), _that).removeClass(before_state).addClass(after_state);
         $viewport.stop().animate({
           height: open_height
-        }, $container.data('duration'), 'easeOutQuad', function() {
+        }, $container.data('duration'), easing, function() {
           // set the current state and call the callback
           $container.data('currentState',after_state);
           $container.data('afterAnimateCallback')();
         });
       });
       /* close button bind */
-      $('.' + localSettings.closeButtonClass, this).bind('click', function() {
+      $('.' + opts.closeButtonClass, this).bind('click', function() {
         var after_state = $container.data('closeClass');
         var before_state = $container.data('openClass');
         $('.' + $container.data('openButtonClass'), _that).removeClass(before_state).addClass(after_state);
         $('.' + $container.data('closeButtonClass'), _that).removeClass(before_state).addClass(after_state);
         $viewport.stop().animate({
           height: closed_height
-        }, $container.data('duration'), 'easeOutQuad', function() {
+        }, $container.data('duration'), easing, function() {
           // set the current state and call the callback
           $container.data('currentState',after_state);
           $container.data('afterAnimateCallback')();
