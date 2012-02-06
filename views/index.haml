@@ -4,54 +4,48 @@
     %script{:src => '/javascripts/jquery-1.6.2.min.js'}
     %script{:src => '/javascripts/jquery.accordion.js'}
     %script $(function() { $('#accordion_text').accordion({viewportClass: 'contents_viewport', openButtonClass: 'open_btn', closeButtonClass: 'close_btn', contentsClass: 'contents'}); });
-    %style
-      = ".container { width: 400px; margin:20px;  float:left; border: 1px solid #ccc; }"
-      = ".javascript, .txtblock { padding:20px;}"
-      = ".container h4 { border-bottom: 1px solid #ccc; margin: 20px 20px 0 20px; }"
-      = "section.thanks { clear:both;}"
-      = ".btn { display: inline; }"
-      = "/* this is the important bit */"
-      = "#accordion_text .contents_viewport{ height: 150px; overflow:hidden; }"
-      = ".btn { color: blue; cursor: pointer;}"
-      = ".clearfix:after { content: \".\"; display: block; height: 0;clear: both; visibility: hidden;}"
+    %link{:href => '/css/css.css', :rel => 'stylesheet', :type => 'text/css'}
+    %link{:href => '/css/expando.css', :rel => 'stylesheet', :type => 'text/css'}
     %title 2rye jQuery Accordion Plugin Demo Page
   %body
-    %h2 2rye's Accordion Demo
+    .page
+      %section.header
+        %h2 2rye's Accordion Demo
+    
+      %section.container.left
+        .not_accordioned
+          %h4 Full Text (for comparison)
+          #full_text.txtblock
+            .contents #{@text}
 
-    %section.container
-      %h4 Accordion Text
-      .javascript
-        %h5 the Javascript
-        %pre
-          %code
-            :preserve
-              $(function() { 
-                $('#accordion_text').accordion({
-                  viewportClass: 'contents_viewport', 
-                  openButtonClass: 'open_btn', 
-                  closeButtonClass: 'close_btn', 
-                  contentsClass: 'contents'}); 
-                });
+      %section.container.right
+        %h4 Accordion Text
+        .javascript
+          %h5 the Javascript
+          %pre
+            %code
+              :preserve
+                $(function() { 
+                  $('#accordion_text').accordion({
+                    viewportClass: 'contents_viewport', 
+                    openButtonClass: 'open_btn', 
+                    closeButtonClass: 'close_btn', 
+                    contentsClass: 'contents'}); 
+                  });
+      
+        .accordion1
+          #accordion_text.txtblock
+            .open_btn.btn
+              open
+            |
+            .close_btn.btn
+              close
+            .contents_viewport
+              .contents.clearfix #{@text}
+    
+      %section.thanks.clearfix
+        %h3 All the following helped to bring you this plugin and demo:
+        %ul
+          = list_of([["2rye", "http://www.2rye.com"], ["jQuery","http://jquery.com/"], ["Jasmine","http://pivotal.github.com/jasmine/"],  ["Sinatra","http://www.sinatrarb.com"],  ["Samuel L. Ipsum", "http://slipsum.com"] ]) do |name, link|
+            %a{:href=> link} #{name}
 
-      .accordion1
-        #accordion_text.txtblock
-          .open_btn.btn
-            open
-          |
-          .close_btn.btn
-            close
-          .contents_viewport
-            .contents.clearfix #{@text}
-            
-
-    %section.container
-      .not_accordioned
-        %h4 Full Text (for comparison)
-        #full_text.txtblock
-          .contents #{@text}
-    %section.thanks
-      %h3 All the following helped to bring you this plugin and demo:
-      %ul
-        = list_of([["2rye", "http://www.2rye.com"], ["Sinatra","http://www.sinatrarb.com"],  ["Jasmine","http://pivotal.github.com/jasmine/"],  ["jQuery","http://jquery.com/"], ]) do |name, link|
-          %a{:href=> link} #{name}
-          

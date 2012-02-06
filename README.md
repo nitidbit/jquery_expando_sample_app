@@ -29,4 +29,4 @@ will start the jasmine server and let you hit http://localhost:8888 to check out
 * [Jasmine](http://pivotal.github.com/jasmine/)
 * [Sinatra](http://www.sinatrarb.com)
 * [Thin](http://code.macournoyer.com/thin/)
-
+* [Samuel L. Ipsum](http://slipsum.com/)
