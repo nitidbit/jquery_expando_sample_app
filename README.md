@@ -26,7 +26,7 @@ will start the jasmine server and let you hit http://localhost:8888 to check out
 
 * [2rye](http://www.2rye.com/)
 * [jQuery](http://jquery.com/)
-* [Jasmine](http://pivotal.github.com/jasmine/)
+* [Jasmine](https://jasmine.github.io/)
 * [Sinatra](http://www.sinatrarb.com)
 * [Thin](http://code.macournoyer.com/thin/)
 * [Samuel L. Ipsum](http://slipsum.com/)
